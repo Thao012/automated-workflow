@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23667eea'/%3E%3Cpath d='M8 12h16M8 16h12M8 20h8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='8' r='4' fill='%23ff4757'/%3E%3C/svg%3E">
+    <title>Art by Poh - SEO Audit Report 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            height: 100vh;
+            overflow: hidden;
+            background: #f5f7fa;
+        }
+        
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Left Sidebar Navigation */
+        .sidebar {
+            width: 320px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-header .domain {
+            font-size: 0.9em;
+            opacity: 0.9;
+            word-break: break-all;
+        }
+        
+        .nav-menu {
+            padding: 20px 0;
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 20px 30px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            font-size: 16px;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #ffd700;
+        }
+        
+        .nav-item.active {
+            background: rgba(255,255,255,0.2);
+            border-left-color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .nav-item .icon {
+            margin-right: 10px;
+            width: 20px;
+            display: inline-block;
+        }
+        
+        .nav-item .count {
+            float: right;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .nav-item .count.critical {
+            background: #ff4757;
+        }
+        
+        .nav-item .count.warning {
+            background: #ffa726;
+        }
+        
+        .nav-item .count.success {
+            background: #2ed573;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background: #f5f7fa;
+        }
+        
+        .content-body {
+            padding: 40px 60px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 60px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Typography */
+        h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            font-size: 1.6rem;
+        }
+        
+        h4 {
+            color: #555;
+            margin: 20px 0 15px 0;
+            font-size: 1.3rem;
+        }
+        
+        /* Card Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .stat-card.critical {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+        }
+        
+        .stat-card.warning {
+            background: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+        }
+        
+        .stat-card.success {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Issue Styles */
+        .issue {
+            padding: 30px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .issue:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .issue.critical {
+            background: #fee;
+            border-left-color: #ff4757;
+        }
+        
+        .issue.warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .issue.info {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+        
+        .issue-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .severity-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .severity-badge:hover {
+            transform: scale(1.1);
+        }
+        
+        .severity-badge.critical {
+            background: #ff4757;
+        }
+        
+        .severity-badge.warning {
+            background: #ffc107;
+        }
+        
+        .severity-badge.info {
+            background: #2196f3;
+        }
+        
+        .issue-page {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+        
+        .issue-details {
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+        
+        /* Action Items */
+        .action-item {
+            background: #e8f5e8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #00b894;
+        }
+        
+        .recommendation-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto;
+                height: auto;
+            }
+            
+            .app-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .sidebar-header {
+                padding: 22px 30px;
+                text-align: center;
+            }
+            
+            .sidebar-header h1 {
+                font-size: 1.4em;
+            }
+            
+            .nav-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 8px 5px;
+                scrollbar-width: thin;
+                gap: 5px;
+                background: rgba(255,255,255,0.1);
+            }
+            
+            .nav-item {
+                white-space: nowrap;
+                min-width: 80px;
+                padding: 12px 15px;
+                font-size: 15px;
+                text-align: center;
+                border-radius: 15px;
+                flex-shrink: 0;
+            }
+            
+            /* Hide emoji icons on mobile */
+            .nav-item .icon {
+                display: none;
+            }
+            
+            /* Hide count numbers on mobile */
+            .nav-item .count {
+                display: none;
+            }
+            
+            .nav-item:hover {
+                background: rgba(255,255,255,0.15);
+            }
+            
+            .nav-item.active {
+                background: rgba(255,255,255,0.25);
+                font-weight: bold;
+            }
+            
+            /* Mobile scrollable navigation */
+            .nav-menu::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .nav-menu::-webkit-scrollbar-track {
+                background: rgba(255,255,255,0.1);
+            }
+            
+            .nav-menu::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.3);
+                border-radius: 2px;
+            }
+            
+            .main-content {
+                overflow-y: visible;
+            }
+            
+            .content-body {
+                padding: 30px;
+            }
+            
+            .tab-content {
+                padding: 45px;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+        
+        /* Tablet Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .nav-item {
+                font-size: 15px;
+                padding: 18px 30px;
+            }
+        }
+        
+        /* Small Mobile (iPhone SE, etc.) */
+        @media (max-width: 480px) {
+            .sidebar-header h1 {
+                font-size: 1.3em;
+            }
+            
+            .sidebar-header .domain {
+                font-size: 0.9em;
+            }
+            
+            .nav-item {
+                min-width: 70px;
+                padding: 9px 12px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+            
+            .nav-menu {
+                padding: 7px 4px;
+                gap: 4px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar Styling */
+        .sidebar::-webkit-scrollbar,
+        .content-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track,
+        .content-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb,
+        .content-body::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>🔍 SEO Audit Report</h1>
+                <div class="domain">art-by-poh.myshopify.com</div>
+                <div style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">
+                    Generated: July 13, 2025
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <span class="icon">📊</span>
+                    Overview
+                </button>
+                
+                <button class="nav-item" data-tab="technical-seo">
+                    <span class="icon">⚙️</span>
+                    Technical SEO
+                    <span class="count critical">81</span>
+                </button>
+                
+                <button class="nav-item" data-tab="heading-structure">
+                    <span class="icon">📋</span>
+                    Heading Structure
+                    <span class="count success">0</span>
+                </button>
+                
+                <button class="nav-item" data-tab="meta-tags">
+                    <span class="icon">🏷️</span>
+                    Meta Tags
+                    <span class="count warning">79</span>
+                </button>
+                
+                <button class="nav-item" data-tab="image-optimisation">
+                    <span class="icon">🖼️</span>
+                    Image Optimisation
+                    <span class="count critical">173</span>
+                </button>
+                
+                <button class="nav-item" data-tab="internal-links">
+                    <span class="icon">🔗</span>
+                    Internal Links
+                    <span class="count success">0</span>
+                </button>
+                
+                <button class="nav-item" data-tab="thin-content">
+                    <span class="icon">📄</span>
+                    Thin Content
+                    <span class="count critical">128</span>
+                </button>
+                
+                <button class="nav-item" data-tab="duplicate-content">
+                    <span class="icon">🔁</span>
+                    Duplicate Content
+                    <span class="count warning">39</span>
+                </button>
+                
+                <button class="nav-item" data-tab="url-structure">
+                    <span class="icon">🌐</span>
+                    URL Structure
+                    <span class="count success">0</span>
+                </button>
+            </div>
+        </nav>
+        
+        <main class="main-content">
+            <div class="content-body">
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-content active">
+                    <h2>📊 Overview</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">287</div>
+                            <div>Total Issues Found</div>
+                        </div>
+                        <div class="stat-card critical">
+                            <div class="stat-number">208</div>
+                            <div>Critical Issues</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-number">79</div>
+                            <div>Warnings</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-number">130</div>
+                            <div>Pages Crawled</div>
+                        </div>
+                    </div>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">ℹ️ IMPORTANT</span>
+                            Content Optimisation Complete - Focus on Technical SEO
+                        </div>
+                        <div class="issue-details">
+                            <strong>Good news:</strong> The major content optimisation work has already been completed (Oct 2023 - May 2024) with 500-600+ words of SEO-optimised content ready for all main landing pages. This content is awaiting implementation during the website redesign. Therefore, focus should shift to immediate technical SEO fixes that can be implemented now.
+                        </div>
+                    </div>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">CRITICAL</span>
+                            Immediate Technical SEO Issues to Fix
+                        </div>
+                        <div class="issue-details">
+                            <ul>
+                                <li><strong>80 canonicalisation issues (61.5%)</strong> - Missing canonical tags causing duplicate content issues</li>
+                                <li><strong>38 meta descriptions too long</strong> - Descriptions exceeding 160 characters will be truncated</li>
+                                <li><strong>39 duplicate content groups</strong> - Multiple URLs showing identical content, diluting SEO value</li>
+                                <li><strong>1 broken external link</strong> - Link to illuminateadelaide.com returning 404 error</li>
+                                <li><strong>173 images missing alt text</strong> - Critical for art website visibility in image search</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Immediate Priority Actions (While Awaiting Redesign)</h3>
+                        <ol>
+                            <li><strong>Add canonical tags to 80 pages</strong> - Implement self-referencing canonicals TODAY</li>
+                            <li><strong>Fix broken external link</strong> - Update or remove link to illuminateadelaide.com</li>
+                            <li><strong>Shorten 38 meta descriptions</strong> - Rewrite to under 160 characters</li>
+                            <li><strong>Add alt text to 173 images</strong> - Critical for art website SEO</li>
+                            <li><strong>Resolve duplicate content</strong> - Use canonical tags for product variants</li>
+                            <li><strong>Submit updated sitemap</strong> - Ensure Google has latest site structure</li>
+                        </ol>
+                        <p><em>Note: Thin content (128 pages) will be resolved automatically when redesign launches with pre-approved optimised content.</em></p>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h3>Quick Technical Wins (Implement Today)</h3>
+                        <ol>
+                            <li><strong>Add canonical tags:</strong> Implement self-referencing canonicals on all 80 pages missing them - <strong>TOP PRIORITY</strong></li>
+                            <li><strong>Fix broken external link:</strong> Update or remove link to illuminateadelaide.com - <strong>5 MINUTE FIX</strong></li>
+                            <li><strong>Shorten meta descriptions:</strong> Export and rewrite 38 descriptions exceeding 160 characters</li>
+                            <li><strong>Add image alt text:</strong> Use Shopify bulk editor to add alt text to 173 images</li>
+                            <li><strong>Resolve duplicate content:</strong> Implement canonical tags for product variants</li>
+                            <li><strong>Submit fresh sitemap:</strong> Update Google Search Console with current site structure</li>
+                        </ol>
+                        <h4>Already Completed ✓</h4>
+                        <ul>
+                            <li><strong>Content optimisation:</strong> 6 main landing pages have 500-600+ words ready for redesign</li>
+                            <li><strong>H1 tags:</strong> All 130 pages have proper H1 tags implemented</li>
+                            <li><strong>Internal linking:</strong> No orphan pages - excellent site structure</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Technical SEO Tab -->
+                <div id="technical-seo" class="tab-content">
+                    <h2>⚙️ Technical SEO Audit</h2>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">🎯 FOCUS AREA</span>
+                            Technical SEO: Your Immediate Priority While Awaiting Redesign
+                        </div>
+                        <div class="issue-details">
+                            <strong>Why focus on technical SEO now?</strong> Unlike content optimisation (which is already complete and waiting for redesign), technical SEO fixes can be implemented immediately on the current site. These improvements will:
+                            <ul>
+                                <li>Provide immediate SEO benefits before redesign launches</li>
+                                <li>Ensure the new site launches with proper technical foundation</li>
+                                <li>Fix crawlability issues that are currently limiting your visibility</li>
+                                <li>Can be completed in 1-2 days with significant impact</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">CRITICAL</span>
+                            Immediate Technical Fixes Required
+                        </div>
+                        <div class="issue-page">81 technical issues affecting crawlability and indexation</div>
+                        <div class="issue-details">
+                            Technical SEO issues prevent search engines from properly crawling, understanding, and indexing your site. The main issue is 80 pages missing canonical tags (61.5% of site), which contributes to duplicate content problems. These fixes can be implemented immediately for quick SEO wins.
+                        </div>
+                    </div>
+                    
+                    <h3>Screaming Frog Crawl Setup</h3>
+                    
+                    <div class="action-item">
+                        <h3>Configure Screaming Frog for Art by Poh Audit</h3>
+                        <div class="code-block">
+<strong>1. Basic Configuration:</strong>
+   - Mode: Spider
+   - Enter URL: https://art-by-poh.myshopify.com
+   - Include Subdomains: Yes
+   - Crawl Outside of Start Folder: No
+   - Respect robots.txt: Yes
+
+<strong>2. Spider Configuration:</strong>
+   - Crawl Images: Yes (Critical for art sites)
+   - Crawl CSS: Yes
+   - Crawl JavaScript: Yes
+   - Crawl SWF: No
+   - Store HTML: Yes
+   - Store Rendered HTML: Yes
+
+<strong>3. Limits:</strong>
+   - Max URI Length: 2000
+   - Max Crawl Depth: 10 (check for orphan pages)
+   - Max Redirects: 5
+                        </div>
+                    </div>
+                    
+                    <h3>404 Error Identification & Fixes</h3>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">URGENT</span>
+                            404 Errors to Check
+                        </div>
+                        <div class="issue-details">
+                            <strong>Common 404 errors on art/e-commerce sites:</strong>
+                            <ul>
+                                <li>Deleted product pages still linked from external sites</li>
+                                <li>Old collection URLs after reorganisation</li>
+                                <li>Broken image links in product descriptions</li>
+                                <li>Outdated links from social media posts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>404 Error Action Plan</h4>
+                        <ol>
+                            <li><strong>Export all 404s from Screaming Frog</strong> (Response Codes → Client Error 4xx)</li>
+                            <li><strong>Prioritise by inbound links:</strong> Fix pages with backlinks first</li>
+                            <li><strong>Create 301 redirects:</strong>
+                                <ul>
+                                    <li>Old product → Similar product or collection</li>
+                                    <li>Deleted collections → Parent category</li>
+                                    <li>Outdated URLs → Current equivalent</li>
+                                </ul>
+                            </li>
+                            <li><strong>Custom 404 page:</strong> Add links to popular artworks and collections</li>
+                        </ol>
+                    </div>
+                    
+                    <h3>301 Redirect Audit</h3>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">CHECK</span>
+                            Redirect Chain Analysis
+                        </div>
+                        <div class="issue-details">
+                            Redirect chains waste crawl budget and dilute link equity. Common issues:
+                            <ul>
+                                <li>HTTP → HTTPS → WWW → Final URL (should be single hop)</li>
+                                <li>Old domain → New domain chains</li>
+                                <li>Multiple product URL changes creating chains</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block">
+<strong>Shopify Redirect Best Practices:</strong>
+
+# Good - Single redirect
+/old-product → /products/new-product
+
+# Bad - Redirect chain
+/old-product → /temp-product → /products/new-product
+
+# Fix chains by updating to direct redirects
+/old-product → /products/new-product
+/temp-product → /products/new-product
+                    </div>
+                    
+                    <h3>External Links Analysis</h3>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">FIX NOW</span>
+                            1 Broken External Link Found
+                        </div>
+                        <div class="issue-details">
+                            The crawl identified 1 broken external link to illuminateadelaide.com (returning 404 error). This broken link harms user experience and can negatively impact SEO. The site has 10 total external links, with all others using HTTPS protocol (good for security).
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>External Links Action Plan</h3>
+                        <ol>
+                            <li><strong>Broken Link:</strong> Fix or remove the link to illuminateadelaide.com</li>
+                            <li><strong>External Link Stats:</strong>
+                                <ul>
+                                    <li>Total external links: 10</li>
+                                    <li>Broken external links: 1</li>
+                                    <li>All links use HTTPS: Yes ✓</li>
+                                </ul>
+                            </li>
+                            <li><strong>Best Practices:</strong>
+                                <ul>
+                                    <li>Open external links in new tabs (target="_blank")</li>
+                                    <li>Add rel="noopener noreferrer" for security</li>
+                                    <li>Consider rel="nofollow" for non-essential external links</li>
+                                </ul>
+                            </li>
+                            <li><strong>Regular monitoring:</strong> Check external links monthly as external sites can change</li>
+                        </ol>
+                    </div>
+                    
+                    <h3>Response Code Analysis</h3>
+                    
+                    <div class="recommendation-box">
+                        <h4>Response Codes to Monitor</h4>
+                        <ul>
+                            <li><strong>200 (OK):</strong> Healthy pages - should be majority</li>
+                            <li><strong>301 (Moved Permanently):</strong> Check for chains and unnecessary redirects</li>
+                            <li><strong>302 (Temporary):</strong> Should be 301s for permanent moves</li>
+                            <li><strong>404 (Not Found):</strong> Fix or redirect immediately</li>
+                            <li><strong>500 (Server Error):</strong> Critical - contact Shopify support</li>
+                            <li><strong>503 (Service Unavailable):</strong> Check during high-traffic periods</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Crawl Depth Issues</h3>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">OPTIMISE</span>
+                            Page Depth Analysis
+                        </div>
+                        <div class="issue-details">
+                            Important pages should be within 3 clicks from homepage. Current issues:
+                            <ul>
+                                <li>Individual artworks may be too deep if only accessible via collections</li>
+                                <li>Artist statement and bio potentially orphaned</li>
+                                <li>High-value original artworks need prominent placement</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>Robots.txt & Sitemap.xml Checks</h3>
+                    
+                    <div class="code-block">
+<strong>Robots.txt Essentials:</strong>
+
+# Check these URLs
+https://art-by-poh.myshopify.com/robots.txt
+
+# Should include:
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkouts
+Disallow: /orders
+Disallow: /account
+Allow: /
+
+Sitemap: https://art-by-poh.myshopify.com/sitemap.xml
+
+<strong>Sitemap.xml Checks:</strong>
+
+# Verify sitemap exists and contains:
+- All product pages
+- All collection pages
+- Important content pages (About, Contact)
+- Updated lastmod dates
+- Priority values (homepage=1.0, products=0.8)
+                    </div>
+                    
+                    <h3>Page Speed Technical Factors</h3>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">PERFORMANCE</span>
+                            Technical Speed Optimisations
+                        </div>
+                        <div class="issue-details">
+                            <strong>Immediate technical fixes for page speed:</strong>
+                            <ul>
+                                <li><strong>Image optimisation:</strong> Compress all images, use WebP format</li>
+                                <li><strong>Lazy loading:</strong> Implement for below-fold images</li>
+                                <li><strong>Minification:</strong> CSS and JavaScript files</li>
+                                <li><strong>Browser caching:</strong> Set appropriate cache headers</li>
+                                <li><strong>Critical CSS:</strong> Inline above-fold styles</li>
+                                <li><strong>Reduce redirects:</strong> Each redirect adds 100-200ms</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>Mobile Crawlability</h3>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">MOBILE-FIRST</span>
+                            Mobile Crawl Considerations
+                        </div>
+                        <div class="issue-details">
+                            Google uses mobile-first indexing. Critical checks:
+                            <ul>
+                                <li><strong>Responsive design:</strong> All content visible on mobile</li>
+                                <li><strong>Touch targets:</strong> Buttons/links at least 48x48 pixels</li>
+                                <li><strong>Viewport configuration:</strong> Proper meta viewport tag</li>
+                                <li><strong>Mobile page speed:</strong> Target under 3 seconds on 3G</li>
+                                <li><strong>No mobile-only 404s:</strong> Same content on desktop and mobile</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Mobile Technical Audit Steps</h3>
+                        <ol>
+                            <li><strong>Configure Screaming Frog mobile crawler:</strong>
+                                <ul>
+                                    <li>Configuration → User-Agent → Googlebot Smartphone</li>
+                                    <li>Compare mobile vs desktop crawl results</li>
+                                </ul>
+                            </li>
+                            <li><strong>Test with Google Mobile-Friendly Test</strong></li>
+                            <li><strong>Check Core Web Vitals:</strong>
+                                <ul>
+                                    <li>LCP (Largest Contentful Paint) < 2.5s</li>
+                                    <li>FID (First Input Delay) < 100ms</li>
+                                    <li>CLS (Cumulative Layout Shift) < 0.1</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h3>🚀 Technical SEO Action Plan (Implement Immediately)</h3>
+                        <h4>Day 1 - Critical Fixes (2-3 hours)</h4>
+                        <ol>
+                            <li><strong>Add canonical tags to 80 pages (61.5%)</strong> - TOP PRIORITY
+                                <ul>
+                                    <li>Implement self-referencing canonicals on all pages</li>
+                                    <li>Use Shopify's canonical URL field in product settings</li>
+                                </ul>
+                            </li>
+                            <li><strong>Fix broken link to illuminateadelaide.com</strong> - 5 MINUTE FIX
+                                <ul>
+                                    <li>Find and update or remove the 404 link</li>
+                                </ul>
+                            </li>
+                            <li><strong>Shorten 38 meta descriptions</strong> - 1-2 HOURS
+                                <ul>
+                                    <li>Export from Screaming Frog</li>
+                                    <li>Rewrite to under 160 characters</li>
+                                    <li>Import back via Shopify bulk editor</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h4>Day 2 - Image & Duplicate Content (3-4 hours)</h4>
+                        <ol start="4">
+                            <li><strong>Add alt text to 173 images</strong> - CRITICAL FOR ART SITE
+                                <ul>
+                                    <li>Use Shopify bulk editor</li>
+                                    <li>Include artwork name, medium, and artist</li>
+                                </ul>
+                            </li>
+                            <li><strong>Address 39 duplicate content groups</strong>
+                                <ul>
+                                    <li>Set canonical URLs for product variants</li>
+                                    <li>Point duplicates to primary product page</li>
+                                </ul>
+                            </li>
+                            <li><strong>Submit updated sitemap</strong> to Google Search Console</li>
+                        </ol>
+                        
+                        <h4>Already Handled ✓</h4>
+                        <ul>
+                            <li><strong>Thin content (128 pages):</strong> Already optimised, waiting for redesign implementation</li>
+                            <li><strong>H1 tags:</strong> All pages have proper H1s</li>
+                            <li><strong>Internal linking:</strong> No orphan pages found</li>
+                        </ul>
+                        
+                        <p><strong>Result:</strong> These technical fixes will provide immediate SEO improvements while your optimised content awaits the redesign launch.</p>
+                    </div>
+                </div>
+                
+                <!-- Heading Structure Tab -->
+                <div id="heading-structure" class="tab-content">
+                    <h2>📋 Heading Structure Analysis</h2>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">EXCELLENT</span>
+                            All 130 Pages Have Proper H1 Tags
+                        </div>
+                        <div class="issue-page">100% of your pages have H1 tags implemented correctly</div>
+                        <div class="issue-details">
+                            Great work! Every page on your site has a properly implemented H1 tag. This is excellent for SEO as H1 tags help search engines understand the main topic of each page. This puts you ahead of many competitors who often miss this fundamental SEO element.
+                        </div>
+                    </div>
+                    
+                    <h3>Maintaining Your H1 Excellence</h3>
+                    
+                    <div class="recommendation-box">
+                        <h4>Keep Up the Good Work</h4>
+                        <p>Your site demonstrates excellent H1 tag implementation. To maintain this standard:</p>
+                        <ul>
+                            <li><strong>Consistency:</strong> Continue using descriptive, keyword-rich H1 tags on all new pages</li>
+                            <li><strong>Uniqueness:</strong> Ensure each page has a unique H1 that accurately describes its content</li>
+                            <li><strong>Length:</strong> Keep H1 tags between 20-70 characters for optimal display</li>
+                            <li><strong>Keywords:</strong> Include relevant search terms naturally within your H1 tags</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>H1 Best Practices You're Following</h3>
+                        <div class="code-block">
+✓ Product pages: Include artwork name and artist
+✓ Collection pages: Describe the collection theme
+✓ Information pages: Clear, descriptive titles
+✓ One H1 per page: Following SEO best practices
+                        </div>
+                        
+                        <h4>Continue These Good Practices:</h4>
+                        <ul>
+                            <li>Regular audits to ensure new pages have H1 tags</li>
+                            <li>Review H1s during content updates to keep them relevant</li>
+                            <li>Test H1 effectiveness with search console data</li>
+                            <li>Update H1s based on keyword research insights</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Meta Tags Tab -->
+                <div id="meta-tags" class="tab-content">
+                    <h2>🏷️ Meta Tags Analysis</h2>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">WARNING</span>
+                            38 Meta Descriptions Too Long
+                        </div>
+                        <div class="issue-page">29% of pages have descriptions exceeding 160 characters</div>
+                        <div class="issue-details">
+                            Meta descriptions that exceed 160 characters will be truncated in search results with "...", which reduces their effectiveness and can lower click-through rates. Google typically displays 155-160 characters on desktop and ~120 on mobile.
+                        </div>
+                    </div>
+                    
+                    <h3>Meta Description Length Issues</h3>
+                    
+                    <div class="recommendation-box">
+                        <h4>Pages Needing Shorter Descriptions</h4>
+                        <p>38 pages have descriptions that will be truncated in search results. Common issues:</p>
+                        <ul>
+                            <li>Product descriptions trying to include too many details</li>
+                            <li>Collection pages with lengthy introductions</li>
+                            <li>Repetitive brand messaging taking up character count</li>
+                            <li>Including dimensions and technical details in descriptions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">MINOR</span>
+                            2 Pages with Descriptions Too Short
+                        </div>
+                        <div class="issue-details">
+                            Only 2 pages have meta descriptions under 120 characters. While not as critical as overly long descriptions, these could be expanded to provide more compelling preview text in search results.
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Meta Description Optimisation Strategy</h3>
+                        <ul>
+                            <li><strong>Length:</strong> Aim for 150-155 characters to ensure full display</li>
+                            <li><strong>Front-load:</strong> Put the most important information first</li>
+                            <li><strong>Call-to-action:</strong> Include "Shop now", "View collection", or "Learn more"</li>
+                            <li><strong>Unique:</strong> Each page should have a distinct description</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>Meta Description Length Guidelines</h4>
+                        <ul>
+                            <li><strong>Desktop:</strong> Keep under 160 characters</li>
+                            <li><strong>Mobile:</strong> Front-load important info in first 120 characters</li>
+                            <li><strong>Best practice:</strong> Aim for 150-155 characters to ensure full display</li>
+                        </ul>
+                        <p><strong>Tip:</strong> Use Screaming Frog to export all meta descriptions over 160 characters and rewrite them to fit within limits while maintaining compelling copy.</p>
+                    </div>
+                    
+                    <div class="code-block">
+&lt;meta name="description" content="Explore [Artwork Name], a limited edition print from Poh Ling Yeow's contemporary figurative art collection. Hand-signed, museum-quality prints starting at $98."&gt;
+                    </div>
+                </div>
+                
+                <!-- Image Optimisation Tab -->
+                <div id="image-optimisation" class="tab-content">
+                    <h2>🖼️ Image Optimisation</h2>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">CRITICAL</span>
+                            173 Images Missing Alt Text
+                        </div>
+                        <div class="issue-page">Over 200% of product images lack alt text</div>
+                        <div class="issue-details">
+                            Alt text is essential for accessibility and image SEO. For an art website where images are the primary content, this is especially critical. Missing alt text means your artwork won't appear in image searches and the site is not accessible to users with visual impairments.
+                        </div>
+                    </div>
+                    
+                    <h3>Technical Image Fixes - Immediate Actions</h3>
+                    
+                    <div class="action-item">
+                        <h3>Priority Technical Optimisations</h3>
+                        <ol>
+                            <li><strong>Bulk Alt Text Update:</strong> Use Shopify's bulk editor to add alt text to all 173 images immediately</li>
+                            <li><strong>Image File Names:</strong> Rename image files from generic names (IMG_1234.jpg) to descriptive names (alona-1-pencil-portrait-poh-ling-yeow.jpg)</li>
+                            <li><strong>Image Compression:</strong> Run all images through compression tools to reduce file sizes without quality loss</li>
+                            <li><strong>Lazy Loading:</strong> Implement lazy loading for images below the fold to improve page speed</li>
+                            <li><strong>WebP Format:</strong> Convert images to WebP format for better performance (Shopify handles this automatically)</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>Writing Effective Alt Text for Artwork</h4>
+                        <ul>
+                            <li><strong>Be Descriptive:</strong> "Contemporary figurative painting of a young woman with owl, acrylic on canvas by Poh Ling Yeow"</li>
+                            <li><strong>Include Medium:</strong> "Limited edition giclee print on 310gsm cotton paper"</li>
+                            <li><strong>Mention Style:</strong> "Airbrushed effect portrait with cultural symbolism"</li>
+                            <li><strong>Add Size Info:</strong> "A3 size (42x29.7cm) art print with deckled edge"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-block">
+&lt;img src="alona-1-pencil-portrait.jpg" alt="Alona 1 - Pencil portrait of young woman, limited edition print by Poh Ling Yeow, 30x21cm"&gt;
+
+&lt;img src="the-girl-series-banner.jpg" alt="The Girl series - Contemporary figurative art featuring Asian-Australian identity themes"&gt;
+
+&lt;img src="portrait-with-toots-acrylic.jpg" alt="Portrait With The Toots - Original acrylic painting of girl with owl, museum-quality giclee print"&gt;
+                    </div>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">IMPORTANT</span>
+                            Technical Optimisations During Redesign
+                        </div>
+                        <div class="issue-details">
+                            <strong>Focus on these technical improvements during the website redesign process:</strong>
+                            <ul>
+                                <li>Implement responsive image serving (different sizes for mobile/desktop)</li>
+                                <li>Set up image CDN for faster global delivery</li>
+                                <li>Create image sitemap for better Google Image search visibility</li>
+                                <li>Add structured data markup for artwork (Product schema)</li>
+                                <li>Implement proper image aspect ratios to prevent layout shift</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Internal Links Tab -->
+                <div id="internal-links" class="tab-content">
+                    <h2>🔗 Internal Links Analysis</h2>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">EXCELLENT</span>
+                            No Orphan Pages Found
+                        </div>
+                        <div class="issue-page">All 130 pages are properly linked within the site structure</div>
+                        <div class="issue-details">
+                            Excellent work! Every page on your site has internal links pointing to it, meaning search engines can discover and index all your content. This is a significant SEO achievement that many websites struggle with. Your internal linking structure is helping both users and search engines navigate your site effectively.
+                        </div>
+                    </div>
+                    
+                    <h3>Internal Linking Success</h3>
+                    
+                    <div class="recommendation-box">
+                        <h4>What You're Doing Right</h4>
+                        <ul>
+                            <li>All product pages are accessible through collection pages</li>
+                            <li>Navigation menu properly links to main sections</li>
+                            <li>Footer contains links to important pages</li>
+                            <li>No isolated or orphaned content</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Maintain Your Strong Internal Linking</h3>
+                        <ol>
+                            <li><strong>Continue current practices:</strong> Keep linking new products to collections</li>
+                            <li><strong>Related products:</strong> Consider adding "You may also like" sections for cross-selling</li>
+                            <li><strong>Contextual links:</strong> Link from artist bio to featured artworks</li>
+                            <li><strong>Breadcrumbs:</strong> Add breadcrumb navigation for better user experience</li>
+                            <li><strong>Regular audits:</strong> Check for orphan pages when adding new content</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>Advanced Internal Linking Opportunities</h4>
+                        <ul>
+                            <li><strong>Topic clusters:</strong> Group related artworks and link between them</li>
+                            <li><strong>Artist journey:</strong> Link chronologically through artistic periods</li>
+                            <li><strong>Medium-based links:</strong> Connect all acrylic works, all prints, etc.</li>
+                            <li><strong>Price-based navigation:</strong> Link to similar price range artworks</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Thin Content Tab -->
+                <div id="thin-content" class="tab-content">
+                    <h2>📄 Thin Content Analysis</h2>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">✓ PLANNED</span>
+                            Content Optimisation Already Completed - Awaiting Website Redesign
+                        </div>
+                        <div class="issue-page">6 landing page optimisations completed and approved (Oct 2023 - May 2024)</div>
+                        <div class="issue-details">
+                            <strong>Important Update:</strong> The thin content issue has already been addressed. Between October 2023 and May 2024, comprehensive content optimisation was completed for the main landing pages:
+                            <ul>
+                                <li><strong>Homepage:</strong> 600+ words of SEO-optimised content ready</li>
+                                <li><strong>Original Art Page:</strong> 550+ words including artist process and techniques</li>
+                                <li><strong>Limited Edition Prints:</strong> 500+ words covering print quality and editions</li>
+                                <li><strong>Artist Bio:</strong> Expanded to 600+ words with full artistic journey</li>
+                                <li><strong>Exhibitions Page:</strong> 500+ words documenting shows and achievements</li>
+                                <li><strong>Contact Page:</strong> Enhanced with studio information and commission process</li>
+                            </ul>
+                            <strong>Current Status:</strong> All optimised content is approved and waiting to be published post-website redesign. Therefore, thin content is not an urgent issue as it will be automatically resolved once the redesign is complete.
+                        </div>
+                    </div>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">
+                            <span class="severity-badge critical">CURRENT STATE</span>
+                            128 Pages with Thin Content (98.5%)
+                        </div>
+                        <div class="issue-page">Only 2 pages out of 130 have sufficient content</div>
+                        <div class="issue-details">
+                            While the current site shows 98.5% of pages with minimal content, this is a temporary situation. The comprehensive content optimisation work completed in 2023-2024 will resolve this issue entirely once implemented during the website redesign.
+                        </div>
+                    </div>
+                    
+                    <h3>Content Status by Page Type</h3>
+                    
+                    <div class="issue critical">
+                        <div class="issue-header">Zero Content Pages (12 pages)</div>
+                        <div class="issue-details">
+                            Gallery, Shop, Previous, aged glade, patient cloud, rough firefly, small sky, strong base, tidy mud, warm island
+                        </div>
+                    </div>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">Severely Thin Pages (Under 30 words)</div>
+                        <div class="issue-details">
+                            <ul>
+                                <li>Contact page: 17 words</li>
+                                <li>All product pages: 26-30 words average</li>
+                                <li>Collection pages: Under 50 words</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Content Expansion Template for Art Products</h3>
+                        <h4>Target: 300-500 words per product page</h4>
+                        
+                        <div class="code-block">
+<strong>Artist's Inspiration</strong> (50-75 words)
+Share the story behind this artwork. What inspired it? What was happening in your life or the world when you created it?
+
+<strong>Technique & Process</strong> (50-75 words)
+Describe your artistic process. What medium did you use? Any special techniques or tools? How long did it take to create?
+
+<strong>Symbolism & Meaning</strong> (75-100 words)
+Explain the deeper meaning. What themes does it explore? What do the visual elements represent? How does it relate to your broader body of work?
+
+<strong>Display Suggestions</strong> (50 words)
+Where does this piece look best? What kind of space or decor does it complement? Any framing recommendations?
+
+<strong>Edition Details</strong> (50 words)
+Limited edition information, signing details, certificate of authenticity, archival quality, expected longevity.
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>Quick Content Wins</h4>
+                        <ul>
+                            <li><strong>Artist Bio:</strong> Expand from 174 to 500+ words with full artistic journey</li>
+                            <li><strong>Collection Pages:</strong> Add 200-300 word introductions explaining each series</li>
+                            <li><strong>Contact Page:</strong> Add studio hours, commission process, gallery location details</li>
+                            <li><strong>Homepage:</strong> Add welcome message and featured collection descriptions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Duplicate Content Tab -->
+                <div id="duplicate-content" class="tab-content">
+                    <h2>🔁 Duplicate Content Issues</h2>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">
+                            <span class="severity-badge warning">WARNING</span>
+                            39 Duplicate Content Groups Found
+                        </div>
+                        <div class="issue-page">Multiple URLs showing identical or very similar content</div>
+                        <div class="issue-details">
+                            Duplicate content confuses search engines about which page to rank and dilutes your SEO authority. Many of these duplicates appear to be products accessible through multiple collection URLs, which is common in e-commerce but needs proper canonicalisation.
+                        </div>
+                    </div>
+                    
+                    <h3>Duplicate Content Patterns</h3>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">Product Variant Duplicates</div>
+                        <div class="issue-details">
+                            Many duplicates are the same product accessible via different URLs (e.g., direct product URL vs. collection URL). This is a common Shopify issue that requires canonical tags to resolve.
+                        </div>
+                    </div>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">Similar Product Descriptions</div>
+                        <div class="issue-details">
+                            Products within the same series (Aubrey, Alona, The Girl) often share identical or near-identical descriptions. Each artwork needs unique content even within a series.
+                        </div>
+                    </div>
+                    
+                    <div class="issue warning">
+                        <div class="issue-header">Collection Page Duplicates</div>
+                        <div class="issue-details">
+                            Some collection pages may be showing identical content or products accessible through multiple collection URLs without proper canonicalisation.
+                        </div>
+                    </div>
+                    
+                    <div class="action-item">
+                        <h3>Solutions for Duplicate Content</h3>
+                        <ol>
+                            <li><strong>Unique Descriptions:</strong> Write individual stories for each artwork, even in the same series</li>
+                            <li><strong>Canonical Tags:</strong> Use canonical URLs to indicate the primary version</li>
+                            <li><strong>Differentiate Framed/Unframed:</strong> Add specific content about framing options, materials, presentation</li>
+                            <li><strong>Series Pages:</strong> Create overview pages for series with links to individual pieces</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>How to Differentiate Series Artworks</h4>
+                        <ul>
+                            <li><strong>Chronology:</strong> Explain how each piece evolved from the previous</li>
+                            <li><strong>Unique Elements:</strong> Highlight what makes each piece special</li>
+                            <li><strong>Color/Mood:</strong> Describe the specific palette and emotional tone</li>
+                            <li><strong>Size/Format:</strong> Mention how size affects the viewing experience</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- URL Structure Tab -->
+                <div id="url-structure" class="tab-content">
+                    <h2>🌐 URL Structure Analysis</h2>
+                    
+                    <div class="issue info">
+                        <div class="issue-header">
+                            <span class="severity-badge info">GOOD</span>
+                            URL Structure is SEO-Friendly
+                        </div>
+                        <div class="issue-details">
+                            Your URLs follow a clean structure (e.g., /products/artwork-name, /collections/collection-name), which is excellent for SEO. The URLs are readable, contain keywords, and follow best practices.
+                        </div>
+                    </div>
+                    
+                    <h3>Current URL Examples</h3>
+                    
+                    <div class="recommendation-box">
+                        <h4>Well-Structured URLs ✓</h4>
+                        <ul>
+                            <li>/products/portrait-with-the-toots</li>
+                            <li>/collections/the-girl</li>
+                            <li>/pages/artist-statement</li>
+                            <li>/products/illuminate-girls-georgia</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Minor Optimisation Opportunities</h3>
+                    
+                    <div class="action-item">
+                        <h4>Consider These Enhancements</h4>
+                        <ul>
+                            <li><strong>Add print size to URLs:</strong> /products/alona-1-a4-print</li>
+                            <li><strong>Include "art" keyword:</strong> /art/limited-edition/alona-1</li>
+                            <li><strong>Differentiate variations:</strong> /products/aubrey-1-framed-a3</li>
+                            <li><strong>Add collection context:</strong> /collections/the-girl/portrait-with-toots</li>
+                        </ul>
+                        <p><em>Note: These are optional enhancements. Your current URL structure is already good for SEO.</em></p>
+                    </div>
+                    
+                    <div class="recommendation-box">
+                        <h4>URL Best Practices You're Following ✓</h4>
+                        <ul>
+                            <li>Using hyphens instead of underscores</li>
+                            <li>Lowercase letters throughout</li>
+                            <li>Descriptive keywords in URLs</li>
+                            <li>No special characters or spaces</li>
+                            <li>Reasonable URL length</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        function showTab(tabId, clickedElement) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Show selected tab
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+            
+            // Add active class to clicked nav item
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+                
+                // Scroll the active tab into view on mobile
+                if (window.innerWidth <= 768) {
+                    clickedElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                }
+            }
+        }
+        
+        // Initialise page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to all nav buttons
+            const navButtons = document.querySelectorAll('.nav-item[data-tab]');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    showTab(tabId, this);
+                });
+            });
+            
+            // Set overview as default active tab
+            showTab('overview', document.querySelector('[data-tab="overview"]'));
+        });
+    </script>
+</body>
+</html>
